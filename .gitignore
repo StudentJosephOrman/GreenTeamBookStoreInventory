@@ -1,0 +1,6 @@
+# Exclude virtual-environment extras
+/Scripts
+/.venv
+/Include
+/Lib
+pyvenv.cfg
