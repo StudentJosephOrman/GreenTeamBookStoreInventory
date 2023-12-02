@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'BookstoreInventory'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = False # This is an HTTP project
+
+AUTHENTICATION_BACKENDS = [
+    'BookstoreInventory.backends.UserBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 ROOT_URLCONF = 'GreenTeamProject.urls'
 
