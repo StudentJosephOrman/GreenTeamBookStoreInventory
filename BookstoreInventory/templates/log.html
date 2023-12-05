@@ -1,0 +1,23 @@
+{% block metadata %}
+<link rel="stylesheet" href="slug.css">
+<title>Green Book:: Login</title>
+{% endblock %}
+
+{% block content %}
+<header>
+	<h1>Login</h1>
+</header>
+<nav>
+	<b><a href="">Home</a>&nbsp;
+	<a href=inventory>Inventory</a>&nbsp;</b>
+	<a href=log>Login</a>&nbsp;</b>
+</nav>
+<div id="wrapper">
+<form method="post" action="https://webdevbasics.net/scripts/pacific.php">
+	<label for="myFName">Username</label>
+	<input type="text" name="myFName" id="myFName" required>
+	<label for="myLName">Password</label>
+	<input type="text" name="myLName" id="myLName" required>
+	<input type="submit" id=mySubmit">
+</form>
+{% endblock %}
