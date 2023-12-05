@@ -19,15 +19,25 @@ class UserManager(BaseUserManager):
         kwargs.setdefault('is_staff', True)
         kwargs.setdefault('is_superuser', True)
         return self.create_user(email, password, **kwargs)
+    
+
+# ENUM Class, not a DB Model
+class USER_TYPE:
+    DEFAULT:int = 0
+    EMPLOYEE:int = 1
+    ADMIN:int = 2
+    MANAGER:int = 3
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.IntegerField(primary_key=True, default=0)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=80)
+    user_type = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    groups = models.ManyToManyField(Group, blank=True, related_name='user_set', verbose_name='groups')
+    groups = models.ManyToManyField(Group, blank=True, related_name='user_groups', verbose_name='groups')
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
@@ -36,6 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     user_permissions = models.ManyToManyField(
         Permission,
+        related_name='user_permissions',
         verbose_name='user permissions',
         blank=True,
     )
@@ -56,19 +67,19 @@ class Author(models.Model):
 
 class Publisher(models.Model):
     id = models.IntegerField(primary_key=True, null=False)
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=80, unique=True)
     location = models.CharField(max_length=120)
 
 class Book(models.Model):
     isbn = models.IntegerField(primary_key=True, null=False)
     title = models.CharField(max_length=120)
-    author_id = models.ForeignKey(Author, db_column='id', on_delete=models.CASCADE)
+    authors = models.ManyToManyField(Author, db_column='author_ids')
     genre = models.CharField(max_length=80)
-    publisher_id = models.ForeignKey(Publisher, db_column='id', on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, db_column='publisher_id', on_delete=models.CASCADE)
     summary = models.CharField(max_length=120)
     quantity = models.IntegerField()
     cost = models.FloatField(
-        validator = [MinValueValidator(0.0)]
+        validators = [MinValueValidator(0.0)]
     )
 
 class Transaction(models.Model):
@@ -79,15 +90,15 @@ class Transaction(models.Model):
     book_isbn = models.ForeignKey(Book, db_column='isbn', on_delete=models.CASCADE)
     date = models.DateField()
     cost = models.FloatField(
-        validator = [MinValueValidator(0.0)]
+        validators = [MinValueValidator(0.0)]
     )
 
 class Shipment(models.Model):
     id = models.IntegerField(primary_key=True, null=False)
     company = models.CharField(max_length=120)
     expected_date = models.DateField()
-    transaction_id = models.ForeignKey(Transaction, db_column='id', on_delete=models.CASCADE)
+    transaction = models.ForeignKey(Transaction, db_column='transaction_id', on_delete=models.CASCADE)
     cost = models.FloatField(
-        validator = [MinValueValidator(0.0)]
+        validators = [MinValueValidator(0.0)]
     )
     delivered = models.BooleanField()
