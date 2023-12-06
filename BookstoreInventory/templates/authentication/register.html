@@ -1,0 +1,27 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/authentication/register.css' %}?={% now 'U' %}">
+<title>Bookstore Inventory | Register</title>
+{% endblock %}
+
+{% block content %}
+<div id="portal">
+    <header>
+        <h1>Create an account</h1>
+    </header>
+
+    <form method="post" action="{% url 'user_register' %}">
+        {% csrf_token %} <!-- Required to let Django know this is a secure form action-->
+        {{form.as_p}}
+
+        <div id="submit-section">
+            <input type="submit" value="Create"/>
+            <a href="{% url 'user_login'%}">Already have an account?</a>
+        </div>
+    </form>
+    <br>
+    
+</div>
+{% endblock %}
