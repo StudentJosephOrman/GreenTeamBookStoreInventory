@@ -9,5 +9,4 @@ class UserRegister(UserCreationForm):
 
 class UserLogin(forms.Form):
     email = forms.CharField(max_length=80, required=True)
-    username = forms.CharField(max_length=80, required=True)
     password = forms.CharField(max_length=80, required=True, widget=forms.PasswordInput)
