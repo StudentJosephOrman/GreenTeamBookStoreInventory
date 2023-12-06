@@ -29,7 +29,6 @@ class USER_TYPE:
     MANAGER:int = 3
 
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.IntegerField(primary_key=True, default=0)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
@@ -55,18 +54,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
     
 
-
+# Note:
+# AN AUTO_INCREMENT ID FIELD IS AUTOMATICALLY CREATED
 # SETTER AND GETTER METHODS ARE AUTOMATICALLY CREATED
 # DON'T HAVE TO IMPLEMENT, UNLESS ADDITIONAL FUNCTIONALITY IS NEEDED
 
+
 class Author(models.Model):
-    id = models.IntegerField(primary_key=True, null=False)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     middle_name = models.CharField(max_length=80)
 
 class Publisher(models.Model):
-    id = models.IntegerField(primary_key=True, null=False)
     name = models.CharField(max_length=80, unique=True)
     location = models.CharField(max_length=120)
 
@@ -83,7 +82,6 @@ class Book(models.Model):
     )
 
 class Transaction(models.Model):
-    id = models.IntegerField(primary_key=True, null=False)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     middle_name = models.CharField(max_length=80)
@@ -94,7 +92,6 @@ class Transaction(models.Model):
     )
 
 class Shipment(models.Model):
-    id = models.IntegerField(primary_key=True, null=False)
     company = models.CharField(max_length=120)
     expected_date = models.DateField()
     transaction = models.ForeignKey(Transaction, db_column='transaction_id', on_delete=models.CASCADE)
