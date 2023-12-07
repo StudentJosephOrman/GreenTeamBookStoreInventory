@@ -4,3 +4,6 @@
 /Include
 /Lib
 pyvenv.cfg
+
+# Exclude Py-compiled
+**/__pycache__/

@@ -1,0 +1,22 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/base.css'%}">
+        {% block metadata %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <a href="">Home</a>;
+            <a href=inventory>Inventory</a>
+            <a href=login>Login</a>
+        </nav>
+        <div id="page-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

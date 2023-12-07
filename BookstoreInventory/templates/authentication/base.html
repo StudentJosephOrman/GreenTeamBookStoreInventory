@@ -1,0 +1,17 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/authentication/base.css'%}?={% now 'U' %}">
+        {% block metadata %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="page-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
