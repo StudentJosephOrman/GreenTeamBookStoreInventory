@@ -17,7 +17,8 @@ The following object models are supported:
 
 
 
-import sys, os, csv
+import csv, os, sys
+from datetime import datetime
 
 this_dir = os.path.dirname(__file__)
 project_dir = "\\".join(this_dir.split("\\")[:-2]) # Project directory is 2 directories back from this_dir
@@ -38,15 +39,15 @@ elif working_folder == 'GreenTeamProject':
 django.setup()
 
 from BookstoreInventory.models import (
-    Book, Author, Publisher, Transaction, Shipment
+    Author, Book, Publisher, Shipment, Transaction
 )
 
-
-AUTHORS_FILE = os.path.join(this_dir, "authors.csv")
-PUBLISHERS_FILE = os.path.join(this_dir, "publishers.csv")
-BOOKS_FILE = os.path.join(this_dir, "books.csv")
-TRANSACTIONS_FILE = os.path.join(this_dir, "transactions.csv")
-SHIPMENTS_FILE = os.path.join(this_dir, "shipments.csv")
+csv_data_dir = os.path.join(this_dir, 'data')
+AUTHORS_FILE = os.path.join(csv_data_dir, "authors.csv")
+PUBLISHERS_FILE = os.path.join(csv_data_dir, "publishers.csv")
+BOOKS_FILE = os.path.join(csv_data_dir, "books.csv")
+TRANSACTIONS_FILE = os.path.join(csv_data_dir, "transactions.csv")
+SHIPMENTS_FILE = os.path.join(csv_data_dir, "shipments.csv")
 
 
 # Fancy ANSI color coding stuff
@@ -62,28 +63,30 @@ def read_csv(fp:str) -> list[list]:
     read_data = []
 
     def to_datatypes(row_data:list[str]) -> list:
-        """Returns data elements in row converted to appropriate datatypes
+        """Modifies the array of data elements converted to appropriate datatypes
 
         Note: Int is automatically converted to float
         """
-
-        formatted = []
-        for data in row_data:
-            if data in ('TRUE', 'FALSE'): # Check if boolean
-                formatted.append(bool(data))
+        row_idx = 0
+        while row_idx < len(row_data):
+            if not row_data[row_idx]: # Check empty field
+                row_data[row_idx] = None
+            elif row_data[row_idx].lower() in ('true', 'false'): # Check if boolean
+                row_data[row_idx] = bool(row_data[row_idx])
             else:
                 try:
-                    to_num = float(data)
-                    to_num = int(to_num) if int(to_num) == to_num else to_num   # Check if float could be converted to integer without losing info
-                    formatted.append(to_num)
+                    as_num = float(row_data[row_idx])
+                    as_num = int(as_num) if int(as_num) == as_num else as_num   # Check if float could be converted to integer without losing info
+                    row_data[row_idx] = as_num
                 except:
-                    formatted.append(data) # Number conversion failed, append the usual string
-        
-        return formatted
+                    pass # Number conversion failed, keep the usual string
+
+            row_idx += 1
     
     with open(fp, "r") as f:
         for row in csv.reader(f):
-            read_data.append(to_datatypes(row))
+            to_datatypes(row) # Modifies elements in place
+            read_data.append(row)
 
     return read_data
 
@@ -107,7 +110,7 @@ def import_authors(save_instances=False):
         if save_instances:
             author.save()
 
-        print(success_msg(f"\tImported: Author({first_name, middle_name, last_name})"), "(SAVED)" if save_instances else "(NOT SAVED)")
+        print(success_msg(f"\tImported: Author{first_name, middle_name, last_name}"), "(SAVED)" if save_instances else "(NOT SAVED)")
 
 
 def import_publishers(save_instances=False):
@@ -122,14 +125,14 @@ def import_publishers(save_instances=False):
     for id, name, location in rows:
         print(highlight_msg(f"Observing Publisher(id={id}, name={name})"))
 
-        instance = Publisher(
+        publisher = Publisher(
             id=id,
             name=name,
             location=location
         )
 
         if save_instances:
-            instance.save()
+            publisher.save()
 
         print(success_msg(f"\tImported: Publisher({name})"), "(SAVED)" if save_instances else "(NOT SAVED)")
 
@@ -149,7 +152,7 @@ def import_books(save_instances=False):
         authors:list[Author] = []
         if isinstance(author_ids, str):
             skip_book = False
-            for id in author_ids.split(','):
+            for id in author_ids.split(';'):
                 try:
                     authors.append( Author.objects.get( id=int(id.strip()) ) )
                 except:
@@ -160,13 +163,11 @@ def import_books(save_instances=False):
             if skip_book:
                 continue
 
-                    
-
-            authors = [ int(id.strip()) for id in author_ids.split(',') ]
         elif isinstance(author_ids, int): # One id was given
             try:
-                authors.append( Author.objects.get(author_ids) )
-            except:
+                authors.append( Author.objects.get(id=author_ids) )
+            except Exception as e:
+                print(e)
                 print(error_msg(f"\tAuthor id ({author_ids}) doesn't exist! Book skipped..."))
                 continue
 
@@ -176,9 +177,8 @@ def import_books(save_instances=False):
             print(error_msg(f"\tPublisher id ({publisher_id}) doesn't exist! Book skipped..."))
             continue
 
-        instance = Book(
+        book = Book(
             isbn = isbn,
-            authors=authors,
             publisher=publisher,
             title = title,
             genre = genre,
@@ -188,14 +188,43 @@ def import_books(save_instances=False):
         )
 
         if save_instances:
-            instance.save()
+            book.save()
+
+        # Must set authors after instance is saved
+        book.authors.set(authors) # Required for many-to-many relationship assignment
 
         print(success_msg(f"\tImported: Book({title})"), "(SAVED)" if save_instances else "(NOT SAVED)")
 
+
+### BELOW IS NOT PARTICULARILY TO BE USED FOR MANUAL ENTRIES###
+# USE THESE FOR DATA RESTORE INSTEAD
 def import_transactions(save_instances=False):
-    # TODO
-    # Uncertanties
-    pass
+    """Loads records from transactions.csv into database
+        Expected headers/order:
+            id, book_isbn, date, quantity, cost
+
+        Saves to database if save_instances is true
+    """
+
+    _, *rows = read_csv(TRANSACTIONS_FILE)
+    for id, book_isbn, date, quantity, cost in rows:
+        print(highlight_msg(f"Observing Transaction(id={id}, book_isbn={book_isbn})"))
+
+        # Validate book_isbn?
+        
+        transaction = Transaction(
+            id=id,
+            book_isbn=book_isbn,
+            date=datetime.strptime(date, "%m/%d/%Y %I:%M %p"),
+            quantity=quantity,
+            cost=cost
+        )
+
+        if save_instances:
+            transaction.save()
+
+        print(success_msg(f"\tImported: Transaction({id})"), "(SAVED)" if save_instances else "(NOT SAVED)")
+
 
 def import_shipments(save_instances=False):
     """Loads records from shipments.csv into database
@@ -206,14 +235,36 @@ def import_shipments(save_instances=False):
     """
     _, *rows = read_csv(SHIPMENTS_FILE)
 
-    for id, company, expected,_date, transaction_id, cost, delivered in rows:
+    for id, company, expected_date, transaction_id, cost, delivered in rows:
         try:
             transaction = Transaction.objects.get(id=transaction_id)
         except:
             print(error_msg(f"Transaction id ({transaction_id}) doesn't exist! Shipment skipped..."))
+            continue
+
+        shipment = Shipment(
+            id=id,
+            company=company,
+            expected_date=datetime.strptime(expected_date, "%m/%d/%Y %I:%M %p"),
+            transaction=transaction,
+            cost=cost,
+            delivered=delivered
+        )
+
+        if save_instances:
+            shipment.save()
+
+        print(success_msg(f"\tImported: Shipment({id})"), "(SAVED)" if save_instances else "(NOT SAVED)")
+
+#################################################################
+        
 
 
 
+        
 
-import_publishers()
-import_books()
+# import_authors(save_instances=True)
+# import_publishers(save_instances=True)
+# import_books(save_instances=True)
+# import_transactions(save_instances=True)
+# import_shipments(save_instances=True)
