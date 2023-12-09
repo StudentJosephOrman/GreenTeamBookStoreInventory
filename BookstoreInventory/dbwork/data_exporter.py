@@ -2,10 +2,10 @@
 Author: Charles (12/8/2023)
     
 To better maintain object information for the database, writing/reading from .csv sheets is a good option.
-For simplicity, this script will only be responsible for reading .csv sheets for each object model
- and writing the data respective to each object model into the database.
+Opposite to 'data_importer.py', this script will be responsible for selecting data from DB models
+ writing data from various objects into the corresponding .csv
 
-This excludes the User model as such data will be managed through the Django system
+Processing of User model objects is not of interest and is excluded
 
 The following object models are supported:
     Books
@@ -18,7 +18,6 @@ The following object models are supported:
 
 
 import os, sys, shutil
-from datetime import datetime
 from typing import Iterable
 
 this_dir = os.path.dirname(__file__)
