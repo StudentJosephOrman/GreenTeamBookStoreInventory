@@ -3,7 +3,7 @@ Author: Charles (12/8/2023)
     
 To better maintain object information for the database, writing/reading from .csv sheets is a good option.
 Opposite to 'data_importer.py', this script will be responsible for selecting data from DB models
- writing data from various objects into the corresponding .csv
+ and writing data from various objects into the corresponding .csv
 
 Processing of User model objects is not of interest and is excluded
 
