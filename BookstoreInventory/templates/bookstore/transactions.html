@@ -1,0 +1,31 @@
+{% extends 'bookstore/base.html' %}
+{% load static %}
+
+{% block metadata %}
+<title>Bookstore Manager | Transactions</title>
+<link rel="stylesheet" href="{% static 'css/bookstore/transactions.css' %}?={% now 'U' %}">
+{% endblock %}
+
+{% block content %}
+<div id="date-range"></div>
+<div id="table-section">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Book ISBN</td>
+            <td>Date</td>
+            <td>Quantity</td>
+            <td>Cost</td>
+        </tr>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.quantity}}</td>
+                <td>{{transaction.cost}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

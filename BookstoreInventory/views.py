@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login as auth_login
 from .forms import UserLogin, UserRegister
 from django.db import IntegrityError
-from BookstoreInventory.models import User
+from BookstoreInventory.models import User, Transaction, Book
 
 
 
@@ -80,16 +80,41 @@ def user_logout(request):
 
 def dashboard(request):
     context = {
-        'currentpage': "Dashboard"
+        'currentpage': "Dashboard",
+        'statistics': [],
     }
     context.update(load_user_data(request.session)) # Add user data variables to context
 
-    dummy_statistics = []
-    add_statistic = lambda label, value: dummy_statistics.append({'label': label, 'value': value})
+    add_statistic = lambda label, value: context['statistics'].append({'label': label, 'value': value}) # Function to add statistics to context
 
-    add_sta
+    add_statistic('Orders today', 93)
+    add_statistic('New books', 14)
+
+    context['top_selling'] = [f'Book{i}' for i in range(10)]
 
     return render(request, 'bookstore/dashboard.html', context=context)
+
+def inventory(request):
+    context = {
+        'currentpage': "Inventory",
+        'books': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
+
+    add_book = lambda name: context['books'].append({'name': name}) 
+    for i in range(30):
+        add_book(f"Book{i}")
+
+    return render(request, 'bookstore/inventory.html', context=context)
+
+def transactions(request):
+    context = {
+        'currentpage': "Transactions",
+        'transactions': [transaction for transaction in Transaction.objects.all()]
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
+
+    return render(request, 'bookstore/transactions.html', context=context)
 
 def books(request):
     pass

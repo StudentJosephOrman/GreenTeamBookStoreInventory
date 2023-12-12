@@ -1,0 +1,95 @@
+#search-section {
+    display: flex;
+    margin-top: 8em;
+}
+
+#search-section #filters {
+    border: solid black 0.1em;
+    background-color: #60DF7A;
+    color: white;
+    border-radius: 2em;
+    text-align: center;
+    width: 6em;
+    line-height: 3em;
+    float:left;
+    box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
+    cursor: pointer;
+}
+
+#search-section #search {
+    width: 70%;
+    max-width: 80em;
+    margin-left: auto;
+    margin-right: auto;
+    color: #60DF7A;
+    border-bottom: solid black 0.1em;
+    font-size: 2em;
+    font-style: italic;
+}
+
+#results-container {
+    display:flex;
+    margin: 8em auto 0 auto;
+    min-height: 35em;
+    max-height: 35em;
+}
+
+#books-list {
+    background-color: yellow;
+    background-color: ghostwhite;
+    border: solid black 0.1em;
+    width: 70%;
+    overflow: auto;
+}
+
+#books-list .book-item {
+   border-bottom: solid black 0.1em;
+   background-color: ghostwhite; 
+   height: 3em;
+}
+
+#books-list .book-item:nth-of-type(odd) {
+    background-color: rgb(231, 231, 218);
+}
+
+#details-container {
+    margin-top: 3em;
+    width: 30%;
+}
+
+#details-container h2 {
+    text-align: center;
+}
+
+#details-container-inner {
+    background-color: ghostwhite;
+    border: solid black 0.1em;
+    height: calc(94%);
+    padding: 1em 1.2em;
+}
+
+#edit-selected-book {
+    float:right;
+}
+
+#details-header {
+    margin: 2em auto 1em auto;
+}
+
+#selected-book-title  {
+    width: 90%;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#selected-book-genre {
+    text-align: center;
+    font-weight: 100;
+}
+
+#details {
+    margin-top: 1em;
+    background-color: red;
+}

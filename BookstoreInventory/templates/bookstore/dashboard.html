@@ -3,24 +3,42 @@
 
 
 {% block metadata %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css'%}?={% now 'U' %}">
+<link rel="stylesheet" href="{% static 'css/bookstore/dashboard.css'%}?={% now 'U' %}">
 <script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
-<title>Bookstore Inventory | Dashboard</title>
+<title>Bookstore Manager | Dashboard</title>
 {% endblock %}
 
 {% block content %}
-<div id="quick-statistics">
-    {% for info in statistics %}
-        <div class="statistics-card">
-            <p id="info-label">{{info.label}}</p>
-            <p id="info-value">{{info.value}}</p>
-        </div>
-    {% endfor %}
-</div>
-<!-- Things coming in today -->
-<!-- Transactions info -->
+<section>
+    <div class="section-header">Quick Statistics</div>
+    <div id="statistics-container">
+        
+        {% for info in statistics %}
+            <div class="statistics-card">
+                <p class="statistic-label">{{info.label}}</p>
+                <p class="statistic-value">{{info.value}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<div class="horizontal-line"></div>
+<section>
+    <div class="section-header">Top Selling</div>
+    <div id="top-selling-container">
+        <table id="book-ranking">
+            {% for book_name in top_selling %}
+                <tr>
+                    {% if forloop.counter == 1 %}
+                        <td><i>1st</i></td>
+                    {% else %}
+                        <td></td>
 
-<main>
-<h1>Dashboard</h1>
-</main>
+                    {% endif %}
+                    <td class='book-item'>{{book_name}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+</div>
 {% endblock %}

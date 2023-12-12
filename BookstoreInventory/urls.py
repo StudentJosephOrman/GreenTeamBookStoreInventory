@@ -7,6 +7,8 @@ urlpatterns = [
     path('logout', views.user_logout, name='user_logout'),
 
     path('', views.dashboard, name='dashboard'),
+    path('inventory', views.inventory, name='inventory'),
+    path('transactions', views.transactions, name='transactions'),
 
     path('books', views.books, name='books'), # Viewing books
     path('books/<int:isbn>', views.books, name='book'), # View specific book
