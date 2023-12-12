@@ -78,11 +78,11 @@ def user_logout(request):
 
     return redirect(reverse('home'))
 
-def home(request):
+def dashboard(request):
     context = {}
     context.update(load_user_data(request.session)) # Add user data variables to context
 
-    return render(request, 'bookstore/index.html', context=context)
+    return render(request, 'bookstore/dashboard.html', context=context)
 
 def books(request):
     pass
