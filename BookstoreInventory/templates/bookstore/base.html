@@ -5,19 +5,42 @@
 <html>
     <head>
         <script src="https://kit.fontawesome.com/bd677980e0.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'css/bookstore/base.css'%}?={% now 'U' %}">
+        <script>
+            $(document).ready(function(){
+                $("#hamburger").click(function(){
+                    $("#side-nav").toggleClass("collapse");
+                });
+            });
+        </script>    
+
         {% block metadata %}
         {% endblock %}
     </head>
     <body>
-        <nav id="side-nav">
-            <div id="hamburger"><i class="fa-solid fa-bars fa-3x"></i></div>
-            <ul>
-                <li><a href="/"><i class="fa-solid fa-warehouse"></i></a></li>
-                <li><a href="inventory"><i class="fa-solid fa-truck-moving"></i></a></li>
-                <li><a href="transactions"><i class="fa-solid fa-dollar-sign"></i></a></li>
-            </ul>  
-        </nav>
+        <div id="sidebar-div">
+            <nav id="side-nav" class="">
+                <div id="hamburger"><i class="fa-solid fa-bars fa-3x"></i></div>
+                <ul>
+                    
+                    <li><a href="/"><i class="fa-solid fa-house"></i>
+                        <p>Dashboard</p>
+                    </a></li>
+                    <li><a href="inventory"><i class="fa-solid fa-warehouse"></i>   
+                        <p>Inventory</p>
+                    </a></li>
+
+                    <li><a href="shipments"><i class="fa-solid fa-truck-moving"></i>
+                        <p>Shipments</p>
+                    </a></li>
+
+                    <li><a href="transactions"><i class="fa-solid fa-dollar-sign"></i>    
+                        <p>Transactions</p>
+                    </a></li>
+                </ul>  
+            </nav>
+        </div>
 
         <main>
             <div id="top-bar">

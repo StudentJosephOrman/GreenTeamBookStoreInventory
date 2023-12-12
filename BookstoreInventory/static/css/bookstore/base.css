@@ -17,17 +17,22 @@ body {
     from {max-width: }
 } */
 
-/* Side nav styling */
+/* Side nav styling full */
+
+
 nav {
-    background-color: #60DF7A;
+    background-color: #53c66a;
+    width: 12.5em;
     min-width: 5em;
-    max-width: 5em;
+    max-width: 15em;
     min-height: 100vh;
     padding-top: 1em;
     z-index: 999;
-    border-right: groove gray 0.1em;
-    /* border-top-left-radius: 1em;
-    border-bottom-left-radius: 1em; */
+    box-shadow: 0.0em 0.0em 0.5em rgb(99, 99, 99);
+    transition: all .3s ease;
+    /* border-right: groove rgb(164, 164, 164) 0.1em; */
+    /* border-top-left-radius: 1em;*/
+    /* border-bottom-left-radius: 1em; */
 }
 
 nav ul {
@@ -36,34 +41,76 @@ nav ul {
     flex-direction: column;
 }
 
-nav ul li {
+nav ul li a{
     display:block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 3em;
-    height: 3em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: relative;
 }
 
+nav ul li a:hover{
+    background: #69f886;  
+}
+
+nav ul li a:hover::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0 ;
+    width: 3px;
+    height: 100%;
+    background: rgb(72, 145, 67);
+    display: block; 
+}
+
+
 nav ul i {
+    margin-left: 10px;
+    display: inline-block;
     color:white;
     font-size: 2em;
 }
 
+nav ul p {
+    margin-left: 10px;
+    display: inline-block;
+    color:white;
+    font-size: 1.2em;
+}
+
+
 #hamburger i {
     color: white;
-    
 }
 
 
 #hamburger{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #60DF7A;
-    border-top-left-radius: 20px;
+    width: 90%;
+    background: #53c66a;
     cursor: pointer;
     text-align: center;
 }
+
+/* Side navbar style collapsed */
+
+nav.collapse{
+    width: 5em;
+}
+
+nav.collapse ul li a{
+    padding-left: 0;
+    padding-right: 10px;
+    text-align: center;
+}
+
+nav.collapse ul li i{
+    margin: 0;
+}
+
+nav.collapse ul li p{
+    display: none;
+}
+
 /* -------- */
 
 /* Main section styling */
@@ -82,7 +129,7 @@ main #top-bar{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0.1em 0.5em 0.5em rgb(99, 99, 99);
+    box-shadow: 0.0em 0.0em 0.5em rgb(99, 99, 99);
 }
 
 main #top-bar #page-title {
@@ -95,7 +142,7 @@ main #top-bar #page-title {
 }
 
 main #top-bar #user-greet {
-    color: blue;
+    color: rgb(2, 79, 2);
     margin-top: 0.5em;
     margin-right: 0.5em;
 }
@@ -104,7 +151,12 @@ main #top-bar ul {
     display: flex;
 }
 
-#top-bar ul li {
+#top-bar ul li a:hover {
+    background: #60DF7A;
+    color: #E5E5E5;
+}
+
+#top-bar ul li a {
     display: block;
     margin: 0 10px;
     width: 36px;
@@ -117,10 +169,7 @@ main #top-bar ul {
     color: #60DF7A;
 }
 
-#topBar ul li {
-    background: #60DF7A;
-    color: #E5E5E5;
-}
+
 
 
 #page-wrapper {
