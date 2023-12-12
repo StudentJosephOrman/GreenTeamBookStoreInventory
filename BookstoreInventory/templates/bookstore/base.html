@@ -4,16 +4,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'css/base.css'%}">
+        <script src="https://kit.fontawesome.com/bd677980e0.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/base.css'%}?={% now 'U' %}">
         {% block metadata %}
         {% endblock %}
     </head>
     <body>
-        <nav>
-            <a href="">Home</a>;
-            <a href=inventory>Inventory</a>
-            <a href=login>Login</a>
-        </nav>
+        <div class="navbarWrapper">
+            <div class="topNavBar">
+                <div class="hamburger"><i class="fa-solid fa-bars fa-3x"></i></div>
+                <div class="topBar">
+                    <div class="page-title">{{currentpage}}</div>
+                    <ul>
+                        <li><a href="#"><i class="fa-solid fa-gear"></i></a></li>
+                        <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                    </ul>    
+                </div> 
+            </div>
+            <div class="sideNavBar">
+                <ul>
+                    <li><a href="#">ff<i class="fa-solid fa-warehouse"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-truck-moving"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-dollar-sign"></i></a></li>
+                </ul>  
+            </div>
+        </div>
         <div id="page-wrapper">
             {% block content %}
             {% endblock %}

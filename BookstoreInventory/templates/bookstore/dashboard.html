@@ -1,37 +1,26 @@
+{% extends 'bookstore/base.html' %}
 {% load static %}
 
 
 {% block metadata %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css'%}">
+<link rel="stylesheet" href="{% static 'css/dashboard.css'%}?={% now 'U' %}">
 <script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
 <title>Bookstore Inventory | Dashboard</title>
 {% endblock %}
 
 {% block content %}
-<header>
-    <div id="navi">
-        <nav>
-            <ul>
-                <b><li><a href=index.html>Home</a>&nbsp;</li>
-                <li><a href=inventory.html>Inventory</a>&nbsp;</li>
-                <li><a href=Log.html>Login</a>&nbsp;</li>
-                <li><a href=test.html>Test</a>&nbsp;</li>
-                <li><a href=test2.html>Test</a>&nbsp;</li></b>
-            </ul>
-        </nav>
-
-        <div id="wrapper">
-            <h1> Search</h1>
-            <h3>Profile</h3>
-            <h3>Settings</h3>
+<div id="quick-statistics">
+    {% for info in statistics %}
+        <div class="statistics-card">
+            <p id="info-label">{{info.label}}</p>
+            <p id="info-value">{{info.value}}</p>
         </div>
-    </div>
-</header>
+    {% endfor %}
+</div>
+<!-- Things coming in today -->
+<!-- Transactions info -->
 
 <main>
 <h1>Dashboard</h1>
-{% if user.is_authenticated %}
-	<p>{{user}} is authenticated</p>
-{% endif %}
 </main>
 {% endblock %}

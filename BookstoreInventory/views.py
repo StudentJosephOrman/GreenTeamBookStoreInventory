@@ -79,8 +79,15 @@ def user_logout(request):
     return redirect(reverse('home'))
 
 def dashboard(request):
-    context = {}
+    context = {
+        'currentpage': "Dashboard"
+    }
     context.update(load_user_data(request.session)) # Add user data variables to context
+
+    dummy_statistics = []
+    add_statistic = lambda label, value: dummy_statistics.append({'label': label, 'value': value})
+
+    add_sta
 
     return render(request, 'bookstore/dashboard.html', context=context)
 

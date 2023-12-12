@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans&display=swap');
+*{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Rethink Sans', sans-serif;
+}
+
+
+.navbarWrapper {
+    margin: 10px;
+}
+
+
+.navbarWrapper .topNavBar {
+    width: calc(100% - 40px);
+    height: 70px;
+    display: flex;
+    position: fixed;
+    top: 10px;
+}
+
+
+.navbarWrapper .topNavBar .hamburger{
+    width: 70px;
+    height: 100%;
+    background: #60DF7A;
+    padding: 15px 17px;
+    border-top-left-radius: 20px;
+    cursor: pointer;
+}
+
+
+.navbarWrapper .topNavBar .hamburger i{
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color:#E5E5E5;
+}
+
+
+.navbarWrapper .topNavBar .topBar{
+    width: calc(100% - 70px);
+    background: #E5E5E5;
+    height: 100%;
+    border-top-right-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0px 1px 1px rgb(99, 99, 99) ;
+}
+
+.navbarWrapper .topNavBar .topBar .page-title {
+    color: rgb(2, 79, 2);
+    font-size: 26px;
+    font-weight: 100;
+    letter-spacing: 2px;
+
+}
+
+.navbarWrapper .topNavBar .topBar ul {
+    display: flex;
+
+}
+
+.navbarWrapper .topNavBar .topBar ul li a{
+    display: block;
+    margin: 0 10px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #60DF7A;
+    background: #E5E5E5;
+    text-align: center;
+    border-radius: 50%;
+    color: #60DF7A;
+}
+
+.navbarWrapper .topNavBar .topBar ul li a:hover{
+    background: #60DF7A;
+    color: #E5E5E5;
+}
+
+/*
+#page-wrapper {
+    width: 80%;
+    margin: 1em auto 0 auto;
+    background-color: rgba(255, 0, 0, 0.342);
+}
+*/
