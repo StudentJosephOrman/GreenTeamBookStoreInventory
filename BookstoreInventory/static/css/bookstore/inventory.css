@@ -1,9 +1,9 @@
 #search-section {
     display: flex;
-    margin-top: 8em;
+    margin-top: 5em;
 }
 
-#search-section #filters {
+button {
     border: solid black 0.1em;
     background-color: #60DF7A;
     color: white;
@@ -11,10 +11,10 @@
     text-align: center;
     width: 6em;
     line-height: 3em;
-    float:left;
     box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
     cursor: pointer;
 }
+
 
 #search-section #search {
     width: 70%;
@@ -22,16 +22,21 @@
     margin-left: auto;
     margin-right: auto;
     color: #60DF7A;
-    border-bottom: solid black 0.1em;
+    border: none;
+    border-bottom: solid black 0.03em;
     font-size: 2em;
     font-style: italic;
 }
 
+#search-section #search:focus {
+    box-shadow: 0.1em 0.2em 0.3em rgb(99, 99, 99);
+}
+
 #results-container {
     display:flex;
-    margin: 8em auto 0 auto;
+    margin: 4em auto 0 auto;
     min-height: 35em;
-    max-height: 35em;
+    height: 42em;
 }
 
 #books-list {
@@ -44,16 +49,26 @@
 
 #books-list .book-item {
    border-bottom: solid black 0.1em;
-   background-color: ghostwhite; 
-   height: 3em;
+   background-color: ghostwhite;
+   font-size: 1.8em;
+   align-self: center;
+}
+
+#books-list .book-item:hover {
+    background-color: grey;
 }
 
 #books-list .book-item:nth-of-type(odd) {
     background-color: rgb(231, 231, 218);
 }
 
+#books-list .book-item:nth-of-type(odd):hover {
+    background-color: rgb(189, 189, 172);
+}
+
 #details-container {
     margin-top: 3em;
+    margin-left: 3em;
     width: 30%;
 }
 
@@ -91,5 +106,20 @@
 
 #details {
     margin-top: 1em;
-    background-color: red;
+}
+
+.detail-inline {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+
+.detail-inline p {
+    margin-left: 1em;
+}
+
+.detail-block p {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
 }

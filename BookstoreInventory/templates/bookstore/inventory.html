@@ -9,29 +9,30 @@
 
 {% block content %}
 <div id="search-section">
-	<div id="filters">Filters</div>
-	<form id="search" method="POST" action="">
-		Search
-	</form>
+	<button id="filters" style="float:left;">Filters</button>
+	<!-- <form id="search-form" method="POST"> -->
+		<!-- {% csrf_token %} Required to let Django know this is a secure form action -->
+		<input id="search" type="text" placeholder="Search" value="{{query}}">
+	<!-- </form> -->
 </div>
 <div id="results-container">
 	<div id="books-list">
+		<span id="selected-book-isbn" style="display:none; visibility: hidden;"></span>
 		{% for book in books %}
-			<div class="book-item" onmouseover="on_book_hover(event)">
-				<!-- {{book.isbn}} | {{book.name}} -->
-			</div>
+			<div class="book-item" onmouseover="on_book_hover(event)">[{{book.isbn}}] {{book.title}}</div>
 		{% endfor %}
 	</div>
 	<div id="details-container">
 		<h2>Details</h2>
 		<div id="details-container-inner">
-			<btn id="edit-selected-book">Edit</btn>
+			<button id="edit-selected-book" onclick="edit_book(event)">Edit</button>
+			<br>
 			<div id="details-header">
 				<h2 id="selected-book-title">Selected book title</h2>
 				<h3 id="selected-book-genre">Genre</h3>
 			</div>
 			<div class="horizontal-line"></div>
-			<div id="details">
+			<div style="display:none;" id="details">
 				<div class="detail-block">
 					<i>Summary:</i>
 					<p id="selected-book-summary"></p>
@@ -57,41 +58,58 @@
 {% block scripts %}
 <!-- <script src="{% static 'js/bookstore/inventory.js' %}"></script> -->
 <script>
-	function update_details_card(summary, authors, quantity, cost){
-    var details_card = document.getElementById('id');
+	function update_details_card(book_data){
+		const details_card = document.getElementById('details');
 
-    if(details_card){
-        document.getElementById('selected-book-summary').innerText = summary;
-        document.getElementById('selected-book-authors').innerText = authors;
-        document.getElementById('selected-book-summary').innerText = summary;
-        document.getElementById('selected-book-summary').innerText = summary;
-    }
+		if(details_card){
+			details_card.style.display = 'inline';
+			document.getElementById('selected-book-title').innerText = book_data['title'];
+			document.getElementById('selected-book-genre').innerText = book_data['genre'];
+			document.getElementById('selected-book-summary').innerText = book_data['summary'];
+			document.getElementById('selected-book-authors').innerText = book_data['authors'].join('\n');
+			// Publisher
+			document.getElementById('selected-book-quantity').innerText = book_data['quantity'];
+			document.getElementById('selected-book-cost').innerText = book_data['cost'];
+		}
 	}
 
 	// On book hover in book list
 	// Fetch book data and update details card
 	async function on_book_hover(event){
 		if(event.target){
-			var info = event.target.innerText.split(' | ');
+			var info = event.target.innerText.substring(1).split('] ');
 			const isbn = info[0];
 			const name = info[1];
 			
-			const response = await fetch(window.location.origin+`api/books/${isbn}/`);
-			const data = response.json();
+			const response = await fetch(`/api/books/${isbn}`);
+			const book_data = await response.json();
 
-			if(data){
-				console.log(data)
+			if(book_data){
+				update_details_card(book_data)
 			}
+
+			// Set selected-book-isbn
+			document.getElementById('selected-book-isbn').innerText = isbn
 		}
 	}
 
-	function search_books(query){
-		console.log(window.location.origin+`/api/books/search/?query=${query}`);
-		fetch(`/api/books/search/${query}`, {
-			method: 'GET',
-		}).n
+	function edit_book(event){
+		const isbn = document.getElementById('selected-book-isbn').innerText; // get selected book isbn
+		
+		// If isbn is empty, do nothing
+		if(isbn.trim() == '') return;
+
+		// Got to edit page for selected book
+		window.location.replace(window.location.origin+`/inventory/edit/${isbn}`)
 	}
 
-	search_books("2412142")
+	const search_bar = document.getElementById('search')
+	search_bar.onkeypress = function(event){
+		// If user pressed enter and the search is not empty
+		if(event.keyCode==13 && search_bar.value.trim() != ''){
+			// Navigate to the search page passing in the query
+			window.location.replace(window.location.origin+`/inventory/search/${search_bar.value}`)
+		}
+	}
 </script>
 {% endblock %}

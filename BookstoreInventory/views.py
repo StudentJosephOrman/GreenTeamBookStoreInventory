@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from .forms import UserLogin, UserRegister, EditBook
 from django.db import IntegrityError
-from BookstoreInventory.models import User, Transaction, Book, Author
+from BookstoreInventory.models import User, Transaction, Book, Author, Publisher
 
 
 
@@ -101,11 +101,90 @@ def dashboard(request):
 def inventory(request):
     context = {
         'currentpage': "Inventory",
-        'books': []
+
+        # Needed for inventory searches
+        'books': [],
+        'query': '',
+        #############
     }
     context.update(load_user_data(request.session)) # Add user data variables to context
 
     return render(request, 'bookstore/inventory.html', context=context)
+
+def inventory_search(request, query:str):
+    context = {
+        'currentpage': "Inventory",
+        'books': [],
+        'query': query
+    }
+    context.update(load_user_data(request.session))
+
+
+    # Query all books matching specified filters
+    filters = ['isbn', 'title', 'genre']
+
+    for book in Book.objects.all():
+        match = False
+        for filter in filters:
+            if match: break # End comparisons if match was already found
+            
+            if query in str(getattr(book, filter)):
+                match = True
+
+        if match:
+            context['books'].append(book)
+
+    return render(request, 'bookstore/inventory.html', context=context)
+
+    
+
+def inventory_edit(request, book_isbn:int):
+    context = {
+        'book_isbn': book_isbn,
+        'currentpage': "Inventory -> Edit book"
+    }
+    context.update(load_user_data(request.session))
+    print(context)
+
+    # Query book
+    book = Book.objects.get(isbn = book_isbn)
+
+    if request.method == 'POST':
+        # Check if form is valid
+        form = EditBook(request.POST)
+        if form.is_valid():
+            # Set book data to that from form
+            book.isbn = form.cleaned_data['isbn']
+
+            author_ids = form.cleaned_data['author_ids'].split(';')
+            book.authors.set(
+                [Author.objects.get(id=int(id)) for id in author_ids]
+            )
+
+            book.publisher= Publisher.objects.get(id=int(form.cleaned_data['publisher_id']))
+            book.summary=form.cleaned_data['summary']
+            book.cost=form.cleaned_data['cost']
+
+            book.save() # Save changes
+
+            return redirect(reverse('inventory'))
+
+    else:
+        # Create a new form with book details already filled in
+        form = EditBook(initial={
+            'isbn': book.isbn,
+            'author_ids': ';'.join([str(author.id) for author in book.authors.all()]),
+            'publisher_id': book.publisher.id,
+            'summary': book.summary,
+            'genre': book.genre,
+            'title': book.title,
+            'cost': book.cost,
+        })
+
+    context['form'] = form
+    context['book_isbn'] = book_isbn
+    
+    return render(request, 'bookstore/edit_book.html', context=context)
 
 # @login_required
 def shipments(request):

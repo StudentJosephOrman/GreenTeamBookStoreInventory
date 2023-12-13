@@ -10,13 +10,15 @@ urlpatterns = [
     path('accountDetails', views.accountDetails, name='accountDetails'),
     path('settings', views.settings, name='settings'),
     path('inventory', views.inventory, name='inventory'),
+    path('inventory/search/<str:query>', views.inventory_search, name='inventory_search'),
+    path('inventory/edit/<int:book_isbn>', views.inventory_edit, name='inventory_edit'),
     path('transactions', views.transactions, name='transactions'),
     path('shipments', views.shipments, name='shipments'),
 
+
+    # APIS
     path('books', apis.books, name='books'), # Viewing books
     path('api/books/<int:isbn>', apis.get_book, name='get_book'), # Get data of a book
-    path('api/books/<int:isbn>/edit', apis.edit_book, name='edit_book'),
-    path('api/books/search/<str:query>', apis.search_books, name='api/books/search')
 
     # path('inventory')
     #...

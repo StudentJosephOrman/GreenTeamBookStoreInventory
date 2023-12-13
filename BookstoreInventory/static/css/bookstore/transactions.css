@@ -1,0 +1,87 @@
+#date-range-select {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+#date-range-select #sep-arrow {
+    font-size: 2em;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+    text-align: center;
+}
+
+#date-range-select input {
+    height: 3em;
+    color: #60DF7A;;
+    font-weight: bold;
+    font-style: italic;
+    border: none;
+    border-bottom: solid black 0.1em;
+}
+
+#date-range-select input:focus {
+    box-shadow: 0.1em 0.2em 0.3em rgb(99, 99, 99);
+}
+
+
+button {
+    border: solid black 0.1em;
+    background-color: #60DF7A;
+    color: white;
+    border-radius: 2em;
+    text-align: center;
+    width: 6em;
+    line-height: 3em;
+    box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
+    cursor: pointer;
+}
+
+
+#table-section {
+    display: flex;
+    margin-top: 3em;
+}
+
+#table-section table {
+    width: 70%;
+    border: solid grey 0.1em;
+}
+
+.transaction-in {
+    background-color: rgba(0, 128, 0, 0.151)
+}
+
+.transaction-out {
+    background-color: rgba(255,0,0, 0.151)
+}
+
+
+#table-section td {
+    border: solid grey 0.1em;
+}
+
+#table-keys {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+}
+
+.table-key {
+    display: flex;
+    margin-left: 3em;
+}
+
+.table-key-color {
+    border: solid black 0.1em;
+    border-radius: 10em;
+    width: 1em;
+    height: 1em;
+}
+
+.table-key-label {
+    color: grey;
+    font-style: italic;
+    font-weight: bold;
+    margin-left: 0.8em;
+}
