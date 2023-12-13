@@ -1,0 +1,16 @@
+{% extends 'bookstore/base.html' %}
+{% load static %}
+
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/bookstore/accountDetails.css'%}?={% now 'U' %}">
+<script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
+<title>Bookstore Manager | Account Details</title>
+{% endblock %}
+
+{% block content %}
+<div id="account-wrapper">
+    <section>
+    </section>
+</div>
+{% endblock %}

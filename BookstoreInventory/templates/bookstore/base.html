@@ -9,6 +9,10 @@
         <link rel="stylesheet" href="{% static 'css/bookstore/base.css'%}?={% now 'U' %}">
         <script>
             $(document).ready(function(){
+                {% if not user.is_authenticated %}
+                    location.replace("/login")
+                {% endif %}
+                
                 $("#hamburger").click(function(){
                     $("#side-nav").toggleClass("collapse");
                 });
@@ -53,8 +57,8 @@
                             Not logged in!
                         {% endif %}
                     </div>
-                    <li><a href="#"><i class="fa-solid fa-gear"></i></a></li>
-                    <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="settings"><i class="fa-solid fa-gear"></i></a></li>
+                    <li><a href="accountDetails"><i class="fa-solid fa-user"></i></a></li>
                 </ul>    
             </div> 
             <div id="page-wrapper">
@@ -66,4 +70,6 @@
     <script>
         // var el = document.getElementById()
     </script>
+    {% block scripts %}
+    {% endblock %} 
 </html>

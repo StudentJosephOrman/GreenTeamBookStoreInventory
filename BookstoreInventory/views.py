@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.http import JsonResponse
 from django.contrib.auth import authenticate, login as auth_login
-from .forms import UserLogin, UserRegister
+from django.contrib.auth.decorators import login_required
+from .forms import UserLogin, UserRegister, EditBook
 from django.db import IntegrityError
-from BookstoreInventory.models import User, Transaction, Book
+from BookstoreInventory.models import User, Transaction, Book, Author
 
 
 
@@ -61,7 +63,7 @@ def user_login(request, just_registered=False):
                 request.session['user_id'] = user.id # Explicitly set user_id to session
 
 
-                return redirect(reverse('home')) # Redirect user to the home page
+                return redirect(reverse('dashboard')) # Redirect user to the home page
         
         error = "Incorrect email or password"
 
@@ -76,8 +78,9 @@ def user_login(request, just_registered=False):
 def user_logout(request):
     request.session['user_id'] = None
 
-    return redirect(reverse('home'))
+    return redirect(reverse('dashboard'))
 
+# @login_required
 def dashboard(request):
     context = {
         'currentpage': "Dashboard",
@@ -94,6 +97,7 @@ def dashboard(request):
 
     return render(request, 'bookstore/dashboard.html', context=context)
 
+# @login_required
 def inventory(request):
     context = {
         'currentpage': "Inventory",
@@ -101,12 +105,19 @@ def inventory(request):
     }
     context.update(load_user_data(request.session)) # Add user data variables to context
 
-    add_book = lambda name: context['books'].append({'name': name}) 
-    for i in range(30):
-        add_book(f"Book{i}")
-
     return render(request, 'bookstore/inventory.html', context=context)
 
+# @login_required
+def shipments(request):
+    context = {
+        'currentpage': "Shipments",
+        'shipments': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
+
+    return render(request, 'bookstore/shipments.html', context=context)
+
+# @login_required
 def transactions(request):
     context = {
         'currentpage': "Transactions",
@@ -116,14 +127,22 @@ def transactions(request):
 
     return render(request, 'bookstore/transactions.html', context=context)
 
-def books(request):
-    pass
+# @login_required
+def settings(request):
+    context = {
+        'currentpage': "Settings",
+        'settings': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
 
-def books(request, isbn:int):
-    pass
+    return render(request, 'bookstore/settings.html', context=context)
 
-def edit_book(request, isbn:int):
-    pass
+# @login_required
+def accountDetails(request):
+    context = {
+        'currentpage': "Account Details",
+        'settings': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
 
-def search_books(request, query:str):
-    pass
+    return render(request, 'bookstore/accountDetails.html', context=context)

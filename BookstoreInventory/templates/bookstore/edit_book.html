@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang= "en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device=width, initial-scale=1.0">
+<form method='POST' action="api/books/{{book_isbn}}/edit">
+    <table>
+        <tr>
+            <td>{{ form.email.label}}</td>
+            <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.password.label }}</td>
+            <td>{{ form.password }}</td>
+        </tr>
+    </table>
+</form>
+
+<!-- 
+    method='POST'
+    action="api/books/{{book_isbn}}/edit"
+    {% csrf_token %}
+
+    # Method 1
+    <
+    ############
+
+    # Method 2 
+    {{form.as_p}}
+    #####
+ -->
