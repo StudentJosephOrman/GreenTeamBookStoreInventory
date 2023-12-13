@@ -2,14 +2,59 @@ section {
     margin: 4em auto;
 }
 
-h3 {
+.section-header {
     color: #53c66a;
+}
+
+.section-content {
+    display: inline;
+    margin-left: 2em;
+}
+
+#in-stock-section {
+    margin-left: 2em;
+}
+
+#in-stock-info {
+    display: flex;
+    flex-direction: row;
+}
+
+#btn-change-stock {
+    margin-left: 2em;
+    margin-bottom: 1.6em;
+}
+
+#in-stock-change {
+    display:flex;
+    flex-direction: row;
+}
+
+#quantity-entry {
+    margin-left: 2em;
+    height: 2.8em;
+    width: 10em;
+}
+
+#btn-quantity-entry-submit {
+    margin-left: 1em;
+    width: 2em;
+    height: 2em;
+    background-color:#53c66a;
+}
+
+#btn-quantity-entry-cancel {
+    margin-left: 1em;
+    width: 2em;
+    height: 2em;
+    background-color:red;
+}
+.modification-pending-msg {
+    color: red;
 }
 
 form {
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 table {
@@ -24,6 +69,6 @@ td {
     height: 2em;
 }
 
-td input {
+td input, textarea {
     font-size: 1em;
 }

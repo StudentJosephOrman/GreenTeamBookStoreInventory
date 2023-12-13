@@ -36,22 +36,33 @@
 }
 
 #books-list .book-item {
-   border-bottom: solid black 0.1em;
-   background-color: ghostwhite;
-   font-size: 1.8em;
-   align-self: center;
+    border: none;
+    border-bottom: solid black 0.1em;
+    background-color: ghostwhite;
+    font-size: 1.8em;
+    align-self: center;
+}
+
+#books-list .book-item.selected-item {
+    background-color: rgb(193, 193, 202);
+    border: solid red 0.1em;
 }
 
 #books-list .book-item:hover {
-    background-color: grey;
+    background-color: rgb(193, 193, 202); 
 }
 
 #books-list .book-item:nth-of-type(odd) {
     background-color: rgb(231, 231, 218);
 }
 
+#books-list .book-item:nth-of-type(odd).selected-item {
+    background-color: rgb(172, 172, 159);
+    border: solid red 0.1em;
+}
+
 #books-list .book-item:nth-of-type(odd):hover {
-    background-color: rgb(189, 189, 172);
+    background-color: rgb(172, 172, 159);
 }
 
 #details-container {

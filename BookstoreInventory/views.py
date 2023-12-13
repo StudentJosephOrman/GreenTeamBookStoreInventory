@@ -140,7 +140,6 @@ def inventory_search(request, query:str):
 
 def manage_book(request, book_isbn:int):
     context = {
-        'book_isbn': book_isbn,
         'currentpage': f"Inventory -> Manage book (isbn: {book_isbn})"
     }
     context.update(load_user_data(request.session))
@@ -172,16 +171,16 @@ def manage_book(request, book_isbn:int):
         # Create a new form with book details already filled in
         form = EditBook(initial={
             'isbn': book.isbn,
+            'title': book.title,
+            'genre': book.genre,
+            'summary': book.summary,
             'author_ids': ';'.join([str(author.id) for author in book.authors.all()]),
             'publisher_id': book.publisher.id,
-            'summary': book.summary,
-            'genre': book.genre,
-            'title': book.title,
             'cost': book.cost,
         })
 
     context['form'] = form
-    context['book_isbn'] = book_isbn
+    context['book'] = book
     
     return render(request, 'bookstore/manage_book.html', context=context)
 
@@ -206,7 +205,26 @@ def transactions(request):
 
     return render(request, 'bookstore/transactions.html', context=context)
 
+
 # @login_required
+def accountBase(request):
+    context = {
+        'currentpage': "Account Details",
+        'settings': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
+
+    return render(request, 'bookstore/accountBase.html', context=context)
+
+def details(request):
+    context = {
+        'currentpage': "Account Details",
+        'settings': []
+    }
+    context.update(load_user_data(request.session)) # Add user data variables to context
+
+    return render(request, 'bookstore/details.html', context=context)
+ 
 def settings(request):
     context = {
         'currentpage': "Settings",
@@ -214,15 +232,4 @@ def settings(request):
     }
     context.update(load_user_data(request.session)) # Add user data variables to context
 
-    return render(request, 'bookstore/settings.html', context=context)
-
-# @login_required
-def accountDetails(request):
-    context = {
-        'currentpage': "Account Details",
-        'settings': []
-    }
-    context.update(load_user_data(request.session)) # Add user data variables to context
-
-    return render(request, 'bookstore/accountDetails.html', context=context)
- 
+    return render(request, 'bookstore/settings.html', context=context) 

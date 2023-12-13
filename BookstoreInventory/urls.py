@@ -9,9 +9,9 @@ urlpatterns = [
     path('logout', views.user_logout, name='user_logout'),
 
     path('', views.dashboard, name='dashboard'),
-    path('accountDetails', views.accountDetails, name='accountDetails'),
-    # path('accountDetails/grabInfo/<str:username>', views.inventory_search, name='inventory_search'),
-    path('settings', views.settings, name='settings'),
+    path('accountBase', views.accountBase, name='accountBase'),
+    path('accountBase/details', views.details, name='account_details'),
+    path('accountBase/settings', views.settings, name='account_settings'),
     path('inventory', views.inventory, name='inventory'),
     path('inventory/search/<str:query>', views.inventory_search, name='inventory_search'),
     path('inventory/manage/<int:book_isbn>', views.manage_book, name='manage_book'),
@@ -22,6 +22,7 @@ urlpatterns = [
     # APIS
     path('books', apis.books, name='books'), # Viewing books
     path('api/books/<int:isbn>', apis.get_book, name='get_book'), # Get data of a book
+    path('api/books/<int:isbn>/changestock/<int:value>', apis.change_book_stock,)
 
     # path('inventory')
     #...

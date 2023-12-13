@@ -8,11 +8,29 @@
 
 {% block content%}
 <section>
-    <h3>Edit details</h3>
+    <h3 class="section-header">Modify Stock</h3>
+    <div class="section-content">
+        <div id="in-stock-section">
+            <div id="in-stock-info">
+                <h2>In stock: x{{book.quantity}}</h2>
+                <button id="btn-change-stock" style="margin-left: 2em;">Change</button>
+            </div>
+            <div id="in-stock-change">
+                <input id="quantity-entry" type="number" min="0" placeholder="New quantity" value="{{book.quantity}}">
+                <button id="btn-quantity-entry-submit">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                <button id="btn-quantity-entry-cancel">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <!-- <i class="modification-pending-msg"></i> -->
+    </div>
 </section>
 <section>
-<h3>Edit details</h3>
-<form method='POST' action="/inventory/manage/{{book_isbn}}">
+<h3 class="section-header">Edit details</h3>
+<form class="section-content" method='POST' action="/inventory/manage/{{book.isbn}}">
     {% csrf_token %} <!-- Required to let Django know this is a secure form action-->
     <table>
         <tr>
@@ -47,5 +65,7 @@
     <button style="margin: 2em auto;" type="submit">Save</button>
 </form>
 </section>
-
+{% endblock %}
+{% block scripts %}
+<!-- <script src="{% static 'js/bookstore/manage_book.js' %}"></script> -->
 {% endblock %}

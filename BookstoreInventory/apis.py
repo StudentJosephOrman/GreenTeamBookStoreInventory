@@ -30,3 +30,16 @@ def get_book(request, isbn:int):
         )
     except:
         pass
+def change_book_stock(request, isbn:int, value:int):
+    response = {
+        'msg': 'fail'
+    }
+
+    try:
+        book = Book.objects.get(isbn=isbn)
+        
+        if(value > 0):
+            book.quantity = value
+            book.save()
+        
+    except: pass

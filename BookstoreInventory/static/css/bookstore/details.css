@@ -1,0 +1,6 @@
+#detail-container{
+    display: flex;
+    flex-direction: row;
+    border: solid black 0.1em;
+    width: 50%;
+}
