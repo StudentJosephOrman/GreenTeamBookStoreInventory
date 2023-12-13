@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views, apis
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('register', views.user_register, name='user_register'),
@@ -8,6 +10,7 @@ urlpatterns = [
 
     path('', views.dashboard, name='dashboard'),
     path('accountDetails', views.accountDetails, name='accountDetails'),
+    # path('accountDetails/grabInfo/<str:username>', views.inventory_search, name='inventory_search'),
     path('settings', views.settings, name='settings'),
     path('inventory', views.inventory, name='inventory'),
     path('inventory/search/<str:query>', views.inventory_search, name='inventory_search'),
@@ -22,4 +25,4 @@ urlpatterns = [
 
     # path('inventory')
     #...
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
