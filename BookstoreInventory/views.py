@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.http import JsonResponse
+from django.http import Http404, JsonResponse
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from .forms import UserLogin, UserRegister, EditBook
@@ -186,6 +186,7 @@ def inventory_edit(request, book_isbn:int):
     
     return render(request, 'bookstore/edit_book.html', context=context)
 
+
 # @login_required
 def shipments(request):
     context = {
@@ -225,3 +226,4 @@ def accountDetails(request):
     context.update(load_user_data(request.session)) # Add user data variables to context
 
     return render(request, 'bookstore/accountDetails.html', context=context)
+ 

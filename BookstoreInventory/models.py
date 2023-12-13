@@ -36,6 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_type = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    pfp = models.ImageField(upload_to='pfps', default="defaultpfp.png")
     groups = models.ManyToManyField(Group, blank=True, related_name='user_groups', verbose_name='groups')
 
     EMAIL_FIELD = 'email'

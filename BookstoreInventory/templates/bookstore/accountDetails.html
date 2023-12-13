@@ -9,17 +9,32 @@
 {% endblock %}
 
 {% block content %}
-<div id="account-wrapper">
+<div class="account-wrapper">
+    <section id="account-pfp">
+        <label id="file-label" for="file">
+        
+        </label>
+        <input id="file" type="file" onchange="loadFile(event)"/>
+        <img src="{{user.pfp.url}}" id="output" width="200" />
+    </section>
+
     <section id="account-details">
         <div id="account-name">
+            <p>Full Name: {{user.first_name}} {{user.last_name}}</p>
+            <br>
+        </div>
+
+        <div id="account-username">
+            <p>Username: {{user.username}}</p>
+            <br>
         </div>
 
         <div id="account-email">
+            <p>Email: {{user.email}}</p>
+            <br>
         </div>
 
-        <div id="account-password">
-        </div>
-
+        
     </section>
 </div>
 {% endblock %}
