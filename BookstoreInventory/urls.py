@@ -11,7 +11,7 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('inventory', views.inventory, name='inventory'),
     path('inventory/search/<str:query>', views.inventory_search, name='inventory_search'),
-    path('inventory/edit/<int:book_isbn>', views.inventory_edit, name='inventory_edit'),
+    path('inventory/manage/<int:book_isbn>', views.manage_book, name='manage_book'),
     path('transactions', views.transactions, name='transactions'),
     path('shipments', views.shipments, name='shipments'),
 

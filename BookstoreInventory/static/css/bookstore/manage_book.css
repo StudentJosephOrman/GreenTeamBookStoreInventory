@@ -1,3 +1,7 @@
+section {
+    margin: 4em auto;
+}
+
 h3 {
     color: #53c66a;
 }
@@ -22,17 +26,4 @@ td {
 
 td input {
     font-size: 1em;
-}
-
-button {
-    border: solid black 0.1em;
-    background-color: #60DF7A;
-    color: white;
-    border-radius: 2em;
-    text-align: center;
-    width: 6em;
-    line-height: 3em;
-    float:left;
-    box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
-    cursor: pointer;
 }

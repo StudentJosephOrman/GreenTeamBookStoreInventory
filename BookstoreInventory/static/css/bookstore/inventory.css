@@ -3,18 +3,6 @@
     margin-top: 5em;
 }
 
-button {
-    border: solid black 0.1em;
-    background-color: #60DF7A;
-    color: white;
-    border-radius: 2em;
-    text-align: center;
-    width: 6em;
-    line-height: 3em;
-    box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
-    cursor: pointer;
-}
-
 
 #search-section #search {
     width: 70%;

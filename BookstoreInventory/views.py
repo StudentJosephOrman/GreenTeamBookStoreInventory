@@ -138,13 +138,12 @@ def inventory_search(request, query:str):
 
     
 
-def inventory_edit(request, book_isbn:int):
+def manage_book(request, book_isbn:int):
     context = {
         'book_isbn': book_isbn,
-        'currentpage': "Inventory -> Edit book"
+        'currentpage': f"Inventory -> Manage book (isbn: {book_isbn})"
     }
     context.update(load_user_data(request.session))
-    print(context)
 
     # Query book
     book = Book.objects.get(isbn = book_isbn)
@@ -184,7 +183,7 @@ def inventory_edit(request, book_isbn:int):
     context['form'] = form
     context['book_isbn'] = book_isbn
     
-    return render(request, 'bookstore/edit_book.html', context=context)
+    return render(request, 'bookstore/manage_book.html', context=context)
 
 # @login_required
 def shipments(request):
