@@ -4,6 +4,8 @@ from .forms import EditBook
 from django.db import IntegrityError
 from BookstoreInventory.models import Book, Author, Publisher
 
+# This python script is a built-in DJango script, but allows us to create our own python scripts and apis.
+
 
 def books(request):
     pass

@@ -3,6 +3,8 @@ from . import views, apis
 from django.conf import settings
 from django.conf.urls.static import static
 
+# This python script is a built-in DJango script, but allows us to create the different hyperlinks for the web-pages.
+
 urlpatterns = [
     path('register', views.user_register, name='user_register'),
     path('login', views.user_login, name='user_login'),

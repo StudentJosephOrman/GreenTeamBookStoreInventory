@@ -1,4 +1,13 @@
 {% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Inventory Page
+
+Description:
+This is the template that allows us to create a an inventory page.
+This will provide a way to create, manage, and view items in the inventory.
+{% endcomment %}
+
 {% load static %}
 
 
@@ -25,6 +34,7 @@
 	<div id="details-container">
 		<h2>Details</h2>
 		<div id="details-container-inner">
+			<button id="manage-selected-book" class="btn-disabled" style="float:right;" onclick="manage_book(event)">Manage</button>
 			<button id="manage-selected-book" class="btn-disabled" style="float:right;" onclick="manage_book(event)">Manage</button>
 			<br>
 			<div id="details-header">

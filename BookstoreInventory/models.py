@@ -1,6 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+# This python script is a built-in DJango script, but this allows us to create our classes for the database and things that
+# relate to it
+
 
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission

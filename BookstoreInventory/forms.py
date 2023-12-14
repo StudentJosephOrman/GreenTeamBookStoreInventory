@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
+# This python script is a built-in DJango script, but allows us to create certain forms and specific parts
+# of user inputs
+
 class UserRegister(UserCreationForm):
     class Meta:
         model = User
