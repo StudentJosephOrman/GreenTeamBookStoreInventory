@@ -1,22 +1,80 @@
 {% load static %}
 
+{% comment %} 
+Name: Base NavBar Template
+
+Description:
+This is the template that allows us to create a navbar for all pages. 
+This will display a navbar to easily go between pages on the website.
+{% endcomment %}
 
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{% static 'css/base.css'%}">
+        <script src="https://kit.fontawesome.com/bd677980e0.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/bookstore/base.css'%}?={% now 'U' %}">
+        <script>
+            $(document).ready(function(){
+                {% if not user.is_authenticated %}
+                    location.replace("/login")
+                {% endif %}
+                
+                $("#hamburger").click(function(){
+                    $("#side-nav").toggleClass("collapse");
+                });
+            });
+        </script>    
+
         {% block metadata %}
         {% endblock %}
     </head>
     <body>
-        <nav>
-            <a href="">Home</a>;
-            <a href=inventory>Inventory</a>
-            <a href=login>Login</a>
-        </nav>
-        <div id="page-wrapper">
-            {% block content %}
-            {% endblock %}
+        <div id="sidebar-div">
+            <nav id="side-nav" class="">
+                <div id="hamburger"><i class="fa-solid fa-bars fa-3x"></i></div>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i>
+                        <p>Dashboard</p>
+                    </a></li>
+                    <li><a href="{% url 'inventory'%}"><i class="fa-solid fa-warehouse"></i>   
+                        <p>Inventory</p>
+                    </a></li>
+
+                    <li><a href="{% url 'shipments'%}"><i class="fa-solid fa-truck-moving"></i>
+                        <p>Shipments</p>
+                    </a></li>
+
+                    <li><a href="{% url 'transactions'%}"><i class="fa-solid fa-dollar-sign"></i>    
+                        <p>Transactions</p>
+                    </a></li>
+                </ul>  
+            </nav>
         </div>
+
+        <main>
+            <div id="top-bar">
+                <div id="page-title">{{currentpage}}</div>
+                <ul>
+                    <div id="user-greet">
+                        {% if user.is_authenticated %}
+                            Hello, {{user.first_name}}!
+                        {% else %}
+                            Not logged in!
+                        {% endif %}
+                    </div>
+                    <li id="account-item"><a href="{% url 'accountBase' %}"><i class="fa-solid fa-user"></i></a></li>
+                </ul>    
+            </div> 
+            <div id="page-wrapper">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
     </body>
+    <script>
+        // var el = document.getElementById()
+    </script>
+    {% block scripts %}
+    {% endblock %} 
 </html>

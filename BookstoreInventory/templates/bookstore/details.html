@@ -1,0 +1,28 @@
+{% extends 'bookstore/accountBase.html' %}
+{% load static %}
+
+{% comment %} 
+Name: Account Details Page
+
+Description:
+This is the template that allows us to create the account details page. 
+This will allow the user to view their account details and overall information.
+{% endcomment %}
+
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/bookstore/details.css'%}?={% now 'U' %}">
+<link rel="stylesheet" href="{% static 'css/bookstore/accountBase.css'%}?={% now 'U' %}">
+<script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
+<title>Bookstore Manager | Settings</title>
+{% endblock %}
+
+{% block accountContent %}
+    <div id="details-wrapper">
+        <div id="detail-container">
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Language: {{django.utils.translation.get_language}}</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,93 @@
+h1 {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 3em;
+}
+
+section {
+	margin: 2em auto 0 auto;
+	padding-bottom: 3em;
+}
+
+.section-header {
+	display: inline-block;
+	margin: 0.7em 0;
+	font-size: 1.9em;
+}
+
+#statistics-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	justify-self: center;
+	align-self: center;
+	width: 80%;
+	margin: 1em auto 0 auto;
+}
+
+.statistics-card {
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 1em;
+	padding: 1em;
+	text-align: center;
+	font-weight: bold;
+	min-width: 10em;
+	max-width: 10em;
+	max-height: 8em;
+	min-height: 8em;
+
+	border: solid black 0.08em;
+	border-radius: 1em;
+	background-color: white;
+	box-shadow: 0.1em 0.2em 0.3em rgb(99, 99, 99) ;
+}
+
+.statistic-label {
+	font-size: 1.1em;
+	font-family: 'Rethink Sans', sans-serif;
+}
+
+.statistic-value {
+	margin-top: 0.3em;
+	font-size: 1.6em;
+}
+
+#top-selling-container {
+	display: flex;
+	flex-direction: row;
+	width: 80%;
+	margin: 1em auto 0 auto;
+}
+
+#book-ranking {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* justify-self: center; */
+	/* align-self: center; */
+}
+
+#top-selling-container .book-item {
+	border: solid black 0.1em;
+	border-radius: 0 1em 1em 0;
+	min-width: 15em;
+	padding-left: 1em;
+}
+
+#book-ranking tr {
+	line-height: 2em;
+}
+
+#book-ranking td i{
+	color: gold;
+	-webkit-text-stroke-width: 0.01em;
+	-webkit-text-stroke-color: rgb(63, 63, 28);
+	font-weight: bold;
+	font-size: 2em;
+	transform: translateY(-0.5em);
+	margin-right: 0.1em;
+	float: left;
+}

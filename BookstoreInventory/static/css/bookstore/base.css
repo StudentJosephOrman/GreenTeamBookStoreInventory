@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans&display=swap');
+*{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Rethink Sans', sans-serif;
+}
+
+html{
+    height: 100%;
+}
+
+body {
+    display:flex;
+    min-height: 100%;
+    /* padding:1em; */
+}
+
+button {
+    display: block;
+    border: solid black 0.1em;
+    background-color: #60DF7A;
+    color: white;
+    border-radius: 2em;
+    text-align: center;
+    width: 6em;
+    line-height: 3em;
+    box-shadow: 0.1em 0.2em 0.1em rgb(99, 99, 99);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4aa85d;
+}
+
+.btn-disabled {
+    background-color: lightgray;
+}
+
+
+nav {
+    background-color: #53c66a;
+    width: 12.5em;
+    min-width: 5em;
+    max-width: 15em;
+    min-height: 100%;
+    padding-top: 1em;
+    z-index: 999;
+    box-shadow: 0.0em 0.0em 0.5em #636363;
+    transition: all .3s ease;
+    /* border-right: groove rgb(164, 164, 164) 0.1em; */
+    /* border-top-left-radius: 1em;*/
+    /* border-bottom-left-radius: 1em; */
+}
+
+nav ul {
+    margin-top: 1.5em;
+    display:flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+}
+
+nav ul li a{
+    display:block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+nav ul li a:hover{
+    background: #69f886;  
+}
+
+
+nav ul i {
+    margin-left: 10px;
+    display: inline-block;
+    color:white;
+    font-size: 2em;
+}
+
+nav ul p {
+    margin-left: 10px;
+    display: inline-block;
+    color:white;
+    font-size: 1.2em;
+}
+
+#hamburger i {
+    color: white;
+}
+
+
+#hamburger{
+    width: 90%;
+    background: #53c66a;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Side navbar style collapsed */
+
+nav.collapse{
+    width: 5em;
+}
+
+nav.collapse ul li a{
+    padding-left: 0;
+    padding-right: 10px;
+    text-align: center;
+}
+
+nav.collapse ul li i{
+    margin: 0;
+}
+
+nav.collapse ul li p{
+    display: none;
+}
+
+/* -------- */
+
+/* Main section styling */
+main {
+    width: 100%;
+    background-color: white;
+    /* border-top-left-radius: 1em; */
+    /* border-bottom-right-radius: 1em; */
+}
+
+main #top-bar{
+    width: 100%;
+    height: 5em;
+    background: #E5E5E5;
+    /* border-top-right-radius: 1em; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* box-shadow: 0 0.1em 0.5em ​#636363;
+     */
+
+    box-shadow: 0.1em 0.2em 0.3em rgb(99, 99, 99);
+
+    position: sticky;
+    top:0;
+}
+
+main #top-bar #page-title {
+    color: #024f02;
+    font-size: 26px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin-left: 1em;
+
+}
+
+main #top-bar #user-greet {
+    color: ​#024f02;
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+}
+
+main #top-bar ul {
+    display: flex;
+}
+
+#top-bar ul li a:hover {
+    background: #60DF7A;
+    color: #E5E5E5;
+}
+
+#top-bar ul li a {
+    display: block;
+    margin: 0 10px;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border: 1px solid #60DF7A;
+    background: #E5E5E5;
+    text-align: center;
+    border-radius: 50%;
+    color: #60DF7A;
+}
+
+#account-item{
+    padding-right: 20px;
+}
+
+
+
+#page-wrapper {
+    width: 90%;
+    margin: 2em auto 0 auto;
+}
+
+
+
+
+
+
+/* Common element styling */
+.horizontal-line {
+    width: 100%;
+    border-bottom: solid #3d3d3d 0.05em;
+}
+
+.vertical-line {
+    min-height: 100%;
+    border-left: solid #3d3d3d 0.05em;
+    width: 0.05em;
+}

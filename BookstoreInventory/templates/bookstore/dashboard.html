@@ -1,0 +1,53 @@
+{% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Dashboard Page
+
+Description:
+This is the template that allows us to create the dashboard page. 
+This will provide areas to show general information that should be displayed
+{% endcomment %}
+
+{% load static %}
+
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/bookstore/dashboard.css'%}?={% now 'U' %}">
+<script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
+<title>Bookstore Manager | Dashboard</title>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-header">Quick Statistics</div>
+    <div id="statistics-container">
+        
+        {% for info in statistics %}
+            <div class="statistics-card">
+                <p class="statistic-label">{{info.label}}</p>
+                <p class="statistic-value">{{info.value}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+<div class="horizontal-line"></div>
+<section>
+    <div class="section-header">Top Selling</div>
+    <div id="top-selling-container">
+        <table id="book-ranking">
+            {% for book_name in top_selling %}
+                <tr>
+                    {% if forloop.counter == 1 %}
+                        <td><i>1st</i></td>
+                    {% else %}
+                        <td></td>
+
+                    {% endif %}
+                    <td class='book-item'>{{book_name}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+</div>
+{% endblock %}

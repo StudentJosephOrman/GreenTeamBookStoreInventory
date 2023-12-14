@@ -1,0 +1,124 @@
+#search-section {
+    display: flex;
+    margin-top: 5em;
+}
+
+
+#search-section #search {
+    width: 70%;
+    max-width: 80em;
+    margin-left: auto;
+    margin-right: auto;
+    color: #60DF7A;
+    border: none;
+    border-bottom: solid black 0.03em;
+    font-size: 2em;
+    font-style: italic;
+}
+
+#search-section #search:focus {
+    box-shadow: 0.1em 0.2em 0.3em rgb(99, 99, 99);
+}
+
+#results-container {
+    display:flex;
+    margin: 4em auto 0 auto;
+    min-height: 35em;
+    height: 42em;
+}
+
+#books-list {
+    background-color: yellow;
+    background-color: ghostwhite;
+    border: solid black 0.1em;
+    width: 70%;
+    overflow: auto;
+}
+
+#books-list .book-item {
+    border: none;
+    border-bottom: solid black 0.1em;
+    background-color: ghostwhite;
+    font-size: 1.8em;
+    align-self: center;
+}
+
+#books-list .book-item.selected-item {
+    background-color: rgb(193, 193, 202);
+    border: solid red 0.1em;
+}
+
+#books-list .book-item:hover {
+    background-color: rgb(193, 193, 202); 
+}
+
+#books-list .book-item:nth-of-type(odd) {
+    background-color: rgb(231, 231, 218);
+}
+
+#books-list .book-item:nth-of-type(odd).selected-item {
+    background-color: rgb(172, 172, 159);
+    border: solid red 0.1em;
+}
+
+#books-list .book-item:nth-of-type(odd):hover {
+    background-color: rgb(172, 172, 159);
+}
+
+#details-container {
+    margin-top: 3em;
+    margin-left: 3em;
+    width: 30%;
+}
+
+#details-container h2 {
+    text-align: center;
+}
+
+#details-container-inner {
+    background-color: ghostwhite;
+    border: solid black 0.1em;
+    height: calc(94%);
+    padding: 1em 1.2em;
+}
+
+#edit-selected-book {
+    float:right;
+}
+
+#details-header {
+    margin: 2em auto 1em auto;
+}
+
+#selected-book-title  {
+    width: 90%;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#selected-book-genre {
+    text-align: center;
+    font-weight: 100;
+}
+
+#details {
+    margin-top: 1em;
+}
+
+.detail-inline {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+
+.detail-inline p {
+    margin-left: 1em;
+}
+
+.detail-block p {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}

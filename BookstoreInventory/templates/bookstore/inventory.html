@@ -1,29 +1,70 @@
+{% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Inventory Page
+
+Description:
+This is the template that allows us to create a an inventory page.
+This will provide a way to create, manage, and view items in the inventory.
+{% endcomment %}
+
+{% load static %}
+
+
 {% block metadata %}
-<title>Bookstore Inventory | Inventory</title>
-<link rel="stylesheet" href="slug.css">
+<title>Bookstore Manager | Inventory</title>
+<link rel="stylesheet" href="{% static 'css/bookstore/inventory.css' %}?={% now 'U' %}">
 {% endblock %}
 
 {% block content %}
-<header>
-	<h1>Inventory</h1>
-</header>
-<nav>
-	<b><a href="">Home</a>&nbsp;
-	<a href=inventory>Inventory</a>&nbsp;</b>
-	<a href=log>Login</a>&nbsp;</b>
-</nav>
-<div id="wrapper">
-<main>
-<table>
-	<tr>
-		<td>Example</td>
-		<td>Example</td>
-		<td>Example</td>
-	</tr>
-	<tr>
-		<td>Placeholder</td>
-		<td>Placeholder</td>
-		<td>Placeholder</td>
-	</tr>
-</table>
+<div id="search-section">
+	<button id="filters" style="float:left;">Filters</button>
+	<!-- <form id="search-form" method="POST"> -->
+		<!-- {% csrf_token %} Required to let Django know this is a secure form action -->
+		<input id="search" type="text" placeholder="Search" value="{{query}}">
+	<!-- </form> -->
+</div>
+<div id="results-container">
+	<div id="books-list">
+		<span id="selected-book-isbn" style="display:none; visibility: hidden;"></span>
+		{% for book in books %}
+			<div class="book-item" onclick="on_book_select(event)">[{{book.isbn}}] {{book.title}}</div>
+		{% endfor %}
+	</div>
+	<div id="details-container">
+		<h2>Details</h2>
+		<div id="details-container-inner">
+			<button id="manage-selected-book" class="btn-disabled" style="float:right;" onclick="manage_book(event)">Manage</button>
+			<button id="manage-selected-book" class="btn-disabled" style="float:right;" onclick="manage_book(event)">Manage</button>
+			<br>
+			<div id="details-header">
+				<h2 id="selected-book-title">No book selected</h2>
+				<h3 id="selected-book-genre"></h3>
+			</div>
+			<div class="horizontal-line"></div>
+			<div style="display:none;" id="details">
+				<div class="detail-block">
+					<i>Summary:</i>
+					<p id="selected-book-summary"></p>
+				</div>
+				<div class="detail-block">
+					<i>Author(s):</i>
+					<p id="selected-book-authors"></p>
+				</div>
+				<div class="detail-inline">
+					<i>Quantity(s):</i>
+					<p id="selected-book-quantity"></p>
+				</div>
+				<div class="detail-inline">
+					<i>Cost:</i>
+					<p id="selected-book-cost"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/bookstore/inventory.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Account Nav Bar
+
+Description:
+This is the template that allows us to create a navbar for each account-related page.
+This will provide a navbar for each account-related page on account pages.
+{% endcomment %}
+
+{% load static %}
+
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/bookstore/accountBase.css'%}?={% now 'U' %}">
+<script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
+<title>Bookstore Manager | Account Details</title>
+{% endblock %}
+
+{% block content %}
+<div id="account-wrapper">
+    <section id="account-sections">
+        <img src="{{user.pfp.url}}" id="output" width="200" />
+        <div class="horizontal-line"></div>
+        <div id="account-div">
+            <br>
+            <nav id="account-nav" class="">
+                <p id="account-username">
+                    {{user.username}}
+                </p>
+                <ul>
+                    <li><a href="{% url 'account_details'%}"><i class="fa-solid fa-circle-info"></i>    
+                        <p>Account Details</p>
+                    </a></li>
+                    <li><a href="{% url 'account_settings'%}"><i class="fa-solid fa-gear"></i>    
+                        <p>Settings</p>
+                    </a></li>
+                </ul>  
+            </nav>
+        </div>
+
+
+
+    </section>
+    <section id=content-wrapper>
+        {% block accountContent %}
+        
+        {% endblock %}
+    </section>
+</div>
+{% endblock %}

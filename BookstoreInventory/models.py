@@ -1,6 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+# This python script is a built-in DJango script, but this allows us to create our classes for the database and things that
+# relate to it
+
 
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
@@ -36,6 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_type = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    pfp = models.ImageField(upload_to='pfps', default="defaultpfp.png")
     groups = models.ManyToManyField(Group, blank=True, related_name='user_groups', verbose_name='groups')
 
     EMAIL_FIELD = 'email'
@@ -76,19 +80,25 @@ class Book(models.Model):
     genre = models.CharField(max_length=80)
     publisher = models.ForeignKey(Publisher, db_column='publisher_id', on_delete=models.CASCADE)
     summary = models.CharField(max_length=120)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0)]
+    )
     cost = models.FloatField(
+        default=0.0,
         validators = [MinValueValidator(0.0)]
     )
 
 class Transaction(models.Model):
-    first_name = models.CharField(max_length=80)
-    last_name = models.CharField(max_length=80)
-    middle_name = models.CharField(max_length=80)
-    book_isbn = models.ForeignKey(Book, db_column='isbn', on_delete=models.CASCADE)
+    book_isbn = models.IntegerField(default=0)
     date = models.DateField()
     cost = models.FloatField(
+        default=0.0,
         validators = [MinValueValidator(0.0)]
+    )
+    quantity = models.IntegerField(
+        default=0,
+        validators=[MinValueValidator(0)]
     )
 
 class Shipment(models.Model):
@@ -96,6 +106,7 @@ class Shipment(models.Model):
     expected_date = models.DateField()
     transaction = models.ForeignKey(Transaction, db_column='transaction_id', on_delete=models.CASCADE)
     cost = models.FloatField(
+        default=0.0,
         validators = [MinValueValidator(0.0)]
     )
     delivered = models.BooleanField()

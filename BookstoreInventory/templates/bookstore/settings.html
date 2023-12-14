@@ -1,0 +1,23 @@
+{% extends 'bookstore/accountBase.html' %}
+
+{% comment %} 
+Name: Settings Page
+
+Description:
+This is the template that allows us to create a settings page.
+This will create a page that allows the user to edit specific settings of their own instances of the website.
+{% endcomment %}
+
+{% load static %}
+
+
+{% block metadata %}
+<link rel="stylesheet" href="{% static 'css/bookstore/settings.css'%}?={% now 'U' %}">
+<link rel="stylesheet" href="{% static 'css/bookstore/accountBase.css'%}?={% now 'U' %}">
+<script src="https://kit.fontawesome.com/2d34f5e9c5.js" crossorigin="anonymous"></script>
+<title>Bookstore Manager | Settings</title>
+{% endblock %}
+
+{% block accountContent %}
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Transactions Page
+
+Description:
+This is the template that allows us to create a an inventory page.
+This will provide a way to create, manage, and view transactions. 
+{% endcomment %}
+
+{% load static %}
+
+{% block metadata %}
+<title>Bookstore Manager | Transactions</title>
+<link rel="stylesheet" href="{% static 'css/bookstore/transactions.css' %}?={% now 'U' %}">
+{% endblock %}
+
+{% block content %}
+<div id="date-range-select">
+    <input id="start-date" type="text" placeholder="Start date">
+    <span id="sep-arrow">></span>
+    <input id="end-date" type="text" placeholder="End date">
+    <button id="range-submit" style="margin-left: 2em;">Go</button>
+</div>
+<div id="table-section">
+    <table>
+        <tr>
+            <th style="width: 10%;">ID</th>
+            <th>Book ISBN</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+        </tr>
+        {% for transaction in transactions %}
+            {% if transaction.inbound %}
+                <tr class="transaction-in">
+            {% else %}
+                <tr class="transaction-out">
+            {% endif %}
+                <td>{{transaction.id}}</td>
+                <td>{{transaction.book_isbn}}</td>
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.quantity}}</td>
+                <td>{{transaction.cost}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div id="table-keys">
+        <div class="table-key">
+            <div class="table-key-color" style="background-color: green"></div>
+            <i class="table-key-label">Inbound</i>
+        </div>
+        <div class="table-key">
+            <div class="table-key-color" style="background-color: red"></div>
+            <i class="table-key-label">Outbound</i>
+        </div>
+    </div>
+</div>
+{% endblock %}

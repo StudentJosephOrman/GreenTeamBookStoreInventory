@@ -1,0 +1,80 @@
+{% extends 'bookstore/base.html' %}
+
+{% comment %} 
+Name: Inventory Page
+
+Description:
+This is the template that allows us to create a management page.
+This will create a page that allows the user to edit specific qualities of the choosen inventory item.
+{% endcomment %}
+
+{% load static %}
+
+{% block metadata %}
+<title>Bookstore Manager | Inventory Edit</title>
+<link rel="stylesheet" href="{% static 'css/bookstore/manage_book.css' %}?={% now 'U' %}">
+{% endblock %}
+
+{% block content%}
+<section>
+    <h3 class="section-header">Modify Stock</h3>
+    <div class="section-content">
+        <div id="in-stock-section">
+            <div id="in-stock-info">
+                <h2>In stock: x{{book.quantity}}</h2>
+                <button id="btn-change-stock" style="margin-left: 2em;">Change</button>
+            </div>
+            <div id="in-stock-change">
+                <input id="quantity-entry" type="number" min="0" placeholder="New quantity" value="{{book.quantity}}">
+                <button id="btn-quantity-entry-submit">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+                <button id="btn-quantity-entry-cancel">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        <!-- <i class="modification-pending-msg"></i> -->
+    </div>
+</section>
+<section>
+<h3 class="section-header">Edit details</h3>
+<form class="section-content" method='POST' action="/inventory/manage/{{book.isbn}}">
+    {% csrf_token %} <!-- Required to let Django know this is a secure form action-->
+    <table>
+        <tr>
+            <td>{{form.isbn.label}}</td>
+            <td>{{form.isbn}}</td>
+        </tr>
+        <tr>
+            <td>{{form.author_ids.label}}</td>
+            <td>{{form.author_ids}}</td>
+        </tr>
+        <tr>
+            <td>{{form.publisher_id.label}}</td>
+            <td>{{form.publisher_id}}</td>
+        </tr>
+        <tr>
+            <td>{{form.summary.label}}</td>
+            <td>{{form.summary}}</td>
+        </tr>
+        <tr>
+            <td>{{form.genre.label}}</td>
+            <td>{{form.genre}}</td>
+        </tr>
+        <tr>
+            <td>{{form.title.label}}</td>
+            <td>{{form.title}}</td>
+        </tr>
+        <tr>
+            <td>{{form.cost.label}}</td>
+            <td>{{form.cost}}</td>
+        </tr>
+    </table>
+    <button style="margin: 2em auto;" type="submit">Save</button>
+</form>
+</section>
+{% endblock %}
+{% block scripts %}
+<!-- <script src="{% static 'js/bookstore/manage_book.js' %}"></script> -->
+{% endblock %}
