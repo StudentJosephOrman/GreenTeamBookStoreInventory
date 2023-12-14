@@ -263,8 +263,8 @@ def import_shipments(save_instances=False):
 
         
 
-import_authors(save_instances=True)
-import_publishers(save_instances=True)
-import_books(save_instances=True)
+# import_authors(save_instances=True)
+# import_publishers(save_instances=True)
+# import_books(save_instances=True)
 # import_transactions(save_instances=True)
 # import_shipments(save_instances=True)
