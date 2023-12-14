@@ -23,7 +23,8 @@ To start setting up your own sever, follow the steps below:
 
 6: Now you should be inside of the virtual enviroment, which you should tell by now having a (someName) at the far left.
 
-7: You will now want to install from the Requirements.txt file in the project, by running the command: pip install -r .\requirements.txt
+7: You will now want to install from the Requirements.txt file in the project, by running the command:
+ pip install -r .\requirements.txt
 
 8: Now that you have the neccesary requirements, navigate to the GreenTeamProject folder (cd G*), and run the following command: python manage.py runserver
 
