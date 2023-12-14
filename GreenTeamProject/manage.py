@@ -3,6 +3,8 @@
 import os
 import sys
 
+# This python script is a built-in DJango script, that is what actually runs the entire project, and allows the hoster to run
+# specific commands related to the project.
 
 def main():
     """Run administrative tasks."""

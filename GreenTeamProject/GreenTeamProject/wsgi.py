@@ -7,6 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
+# This python script is a built-in DJango script, but allows the app to view
+
 import os
 
 from django.core.wsgi import get_wsgi_application

@@ -8,6 +8,8 @@ from django.db import IntegrityError
 from BookstoreInventory.models import User, Transaction, Book, Author, Publisher
 
 
+# This python script is a built-in DJango script, but allows us to create the different views that will accept and return
+# web requests and web responses, in that order. 
 
 
 #NOT A VIEW FUNCTION#

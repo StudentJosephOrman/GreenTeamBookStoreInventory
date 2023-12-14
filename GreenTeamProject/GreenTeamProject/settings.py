@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+# Thispython script is a built-in DJango script, but allows us to modify certain settings of the DJango project, such as language
+# and translation.
+
 import os
 from pathlib import Path
 
