@@ -105,7 +105,7 @@ def import_authors(save_instances=False):
     for id, first_name, middle_name, last_name in rows:
         print(highlight_msg(f"Observing Publisher(id={id}, full_name={first_name, middle_name, last_name})"))
 
-        author = Author(id=id, first_name=first_name, middle_name=middle_name, last_name=last_name)
+        author = Author(id=id, first_name=first_name, middle_name=middle_name or "", last_name=last_name)
 
         if save_instances:
             author.save()
@@ -128,7 +128,7 @@ def import_publishers(save_instances=False):
         publisher = Publisher(
             id=id,
             name=name,
-            location=location
+            location=location or ""
         )
 
         if save_instances:
@@ -263,8 +263,8 @@ def import_shipments(save_instances=False):
 
         
 
-# import_authors(save_instances=True)
-# import_publishers(save_instances=True)
-# import_books(save_instances=True)
+import_authors(save_instances=True)
+import_publishers(save_instances=True)
+import_books(save_instances=True)
 # import_transactions(save_instances=True)
 # import_shipments(save_instances=True)
