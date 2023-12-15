@@ -26,6 +26,8 @@ To start setting up your own sever, follow the steps below:
 7: You will now want to install from the Requirements.txt file in the project, by running the command:
  pip install -r .\requirements.txt
 
-8: Now that you have the neccesary requirements, navigate to the GreenTeamProject folder (cd G*), and run the following command: python manage.py runserver
+8: Now, you can run the program by running the command: python GreenTeamProject\manage.py runserver
+
+8.1: Alternatively, you can change directory through the command prompt (by doing cd G*), and run the following command: python manage.py runserver
 
 9: Your device should now be hosting a local version of the website, hosted at 127.0.0.1:8000.
